@@ -227,7 +227,7 @@ function Main() {
             <div>
                 {messages.length === 0 && (
                     <div className='header'>
-                        {/* <h2 className='inter-bold model-text'>Hey , I’m Geo Ai</h2> */}
+                        <h2 className='inter-bold model-text'>Hey , I’m Geo Ai</h2>
                         <h1 className='inter-semibold text'>Ready to bring your imagination to life?</h1>
                     </div>
                 )}

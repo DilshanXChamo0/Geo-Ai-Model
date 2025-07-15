@@ -254,16 +254,6 @@ app.get('/api/v1/get-prompts/:userId', (req, res) => {
 
 });
 
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.get('/c', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 app.listen(port, () => {
     console.log(`Backend server is running on http://localhost:${port}`);
 });
