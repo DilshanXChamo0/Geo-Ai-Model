@@ -89,17 +89,6 @@ function Main() {
     }
 
     useEffect(() => {
-        const handleBeforeUnload = (e) => {
-            e.preventDefault();
-            e.returnValue = '';
-        };
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, []);
-
-    useEffect(() => {
 
         const queryParams = new URLSearchParams(window.location.search);
         const conversationId = queryParams.get('cid');
