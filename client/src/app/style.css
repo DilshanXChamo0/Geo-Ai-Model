@@ -290,6 +290,10 @@
   backdrop-filter: blur(6px); /* optional blur */
 }
 
+select option {
+  color: black;
+}
+
 .icon {
   color: white;
 }
