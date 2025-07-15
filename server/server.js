@@ -254,10 +254,8 @@ app.get('/api/v1/get-prompts/:userId', (req, res) => {
 
 });
 
-// Serve static React build
 app.use(express.static(path.join(__dirname, 'build')));
 
-// ✅ React fallback (for /c/* etc)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
