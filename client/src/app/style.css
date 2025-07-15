@@ -57,50 +57,29 @@
 
 .main {
   height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   overflow: hidden;
+  display: flex;
+}
+
+.left {
+  width: 19%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  width: 81%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  background-color: rgba(0, 0, 0, 1);
-
-  background: radial-gradient(
-    circle at center,
-    #855cffbf 0%,
-    rgba(0, 0, 0, 1) 50%
-  );
-  background-size: 200% 200%;
-  animation: moveCircle 30s linear infinite;
-}
-
-@keyframes moveCircle {
-  0% {
-    background-position: 50% 0%;
-  }
-  25% {
-    background-position: 100% 50%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  75% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 50% 0%;
-  }
 }
 
 .header {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-left: 250px;
 }
 
 .model-text {
@@ -118,6 +97,13 @@
   letter-spacing: 1px;
 }
 
+.middle-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .prompt-box {
   margin-top: 15px;
   margin-bottom: 5px;
@@ -125,8 +111,6 @@
   padding: 15px;
   border-radius: 15px;
   border: 0.1rem solid rgba(255, 255, 255, 0.2);
-  margin-left: 250px;
-
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.2),
@@ -260,13 +244,13 @@
   outline: none;
   padding: 12px;
   border-radius: 100px;
-  font-size: 16px;
-  position: fixed;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   bottom: 13px;
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 15px;
 }
 
 .info {
@@ -305,7 +289,7 @@ select option {
 .chat-section {
   display: flex;
   flex-direction: column;
-  width: 55%;
+  width: 60%;
   height: 80%;
   gap: 10px;
   padding: 20px;
@@ -313,7 +297,6 @@ select option {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  margin-left: 300px;
 }
 
 .chat-section::-webkit-scrollbar {
@@ -321,7 +304,7 @@ select option {
 }
 
 .chat-bubble {
-  max-width: 50%;
+  max-width: 80%;
   border-radius: 100px;
   font-size: 16px;
   margin-top: 5px;
@@ -575,6 +558,7 @@ select option {
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  margin: 0px 10px;
 }
 
 .close-btn-auth-model {
@@ -786,11 +770,10 @@ select option {
 }
 
 .history-container {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  bottom: 10px;
-  width: 330px;
+  position: relative;
+  margin: 10px 10px;
+  width: 340px;
+  height: 98%;
   border-radius: 15px;
   border: 0.1rem solid rgba(255, 255, 255, 0.215);
   background: linear-gradient(
@@ -799,10 +782,158 @@ select option {
     rgba(255, 255, 255, 0.05)
   );
   color: white;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   cursor: pointer;
   outline: none;
+}
+
+@media only screen and (max-width: 1500px) {
+  .left {
+    width: 23%;
+  }
+
+  .chat-section {
+    width: 80%;
+    height: 80%;
+    margin: 0;
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .left {
+    width: 0%;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .history-container {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .prompt-box {
+    width: 600px;
+  }
+
+  .chat-section {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .prompt-box {
+    width: 500px;
+    position: fixed;
+    bottom: 10px;
+    margin: 5px;
+  }
+
+  .text {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .chat-bubble .user {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .prompt-box {
+    display: none;
+  }
+
+  .right {
+    margin-bottom: 70px;
+  }
+
+  .mini-content {
+    position: fixed;
+    bottom: 60px;
+    left: 5px;
+    right: 5px;
+  }
+
+  .dropdown-two {
+    position: fixed;
+    bottom: 10px;
+    left: 5px;
+    right: 5px;
+  }
+
+  .mini-content,
+  .choose {
+    display: block;
+  }
+
+  .mini-content,
+  .choose {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .text {
+    text-align: center;
+    margin: 0px 10px;
+  }
+
+  .mini-content textarea {
+    border: 0.1rem solid rgba(255, 255, 255, 0.215);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.05)
+    );
+    color: white;
+    border-radius: 15px;
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .mini-content .choose-two .count {
+    margin-top: 10px;
+    border: 0.1rem solid rgba(255, 255, 255, 0.215);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.05)
+    );
+    color: white;
+    padding: 10px;
+    border-radius: 200px;
+    font-size: 15px;
+  }
+
+  .dropdown-two div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .dropdown-two {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn-section {
+    margin-top: 10px;
+    /* margin-left: 30px; */
+  }
+}
+
+@media only screen and (min-width: 516px) {
+  .mini-content {
+    display: none;
+  }
 }
 
 .logo {

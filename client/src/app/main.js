@@ -58,32 +58,36 @@ function Main() {
                         });
 
                         if (convo.images?.length) {
-
+                            // Add loading message
                             allMessages.push({
                                 type: 'loading',
                                 count: convo.images.length,
                                 time: new Date(convo.createdAt),
                             });
-
-                            setTimeout(() => {
-                                setMessages(prev => {
-                                    const updated = [...prev];
-                                    updated.pop();
-                                    return [
-                                        ...updated,
-                                        {
-                                            type: 'bot',
-                                            images: convo.images,
-                                            time: new Date(convo.createdAt),
-                                        }
-                                    ];
-                                });
-                            }, 400);
-
+                            // Immediately add bot message after loading
+                            allMessages.push({
+                                type: 'bot',
+                                images: convo.images,
+                                time: new Date(convo.createdAt),
+                            });
                         }
                     });
 
-                    setMessages(allMessages);
+                    // Remove all loading messages except the last one for each bot message
+                    const filteredMessages = [];
+                    for (let i = 0; i < allMessages.length; i++) {
+                        if (
+                            allMessages[i].type === 'loading' &&
+                            allMessages[i + 1] &&
+                            allMessages[i + 1].type === 'bot'
+                        ) {
+                            // Skip this loading message, as the bot message will follow
+                            continue;
+                        }
+                        filteredMessages.push(allMessages[i]);
+                    }
+
+                    setMessages(filteredMessages);
                 }
             });
     }
@@ -188,7 +192,52 @@ function Main() {
 
             <AnimatedBackground />
 
-            <History fetchConversation={fetchConversation} />
+            <div className="left">
+                {/* Left side content */}
+                <History fetchConversation={fetchConversation} />
+            </div>
+
+            <div className="right">
+                {/* Right side content */}
+
+                {messages.length > 0 && (
+
+                    <div className='chat-section' onClick={() => { setShowDropdown(false) }}>
+
+                        {messages.map((message, index) => (
+
+                            <div key={index} className='role'>
+
+                                {message.type === 'user' && <Message message={message} />}
+
+                                {message.type === 'bot' && message.images && <ModelGeneratedOutPut
+                                    message={message} handleImageOpen={handleImageOpen} handleDownload={handleDownload} />}
+
+                                {message.type === 'loading' && <Skeleton message={message} />}
+
+                            </div>
+
+                        ))}
+
+                    </div>
+                )}
+
+
+                <div className='middle-content'>
+                    {messages.length === 0 && (
+                        <div className='header'>
+                            <h2 className='inter-bold model-text'>Hey , I’m Geo Ai</h2>
+                            <h1 className='inter-semibold text'>Ready to bring your imagination to life?</h1>
+                        </div>
+                    )}
+
+                    <ImagePreview handleDownload={handleDownload} handleImageOpen={handleImageOpen}
+                        imgIsOpen={imgIsOpen} selectedImage={selectedImage} />
+
+                    <PromptBox setPrompt={setPrompt} handleSend={handleSend} imageEngine={imageEngine} isStarting={isStarting}
+                        numberOfImages={numberOfImages} prompt={prompt} resolution={resolution} setImageEngine={setImageEngine} setNumberOfImages={setNumberOfImages} setResolution={setResolution} />
+                </div>
+            </div>
 
 
             {localStorage.getItem('user') ? <button className='user-btn group' onClick={() => setShowDropdown(!showDropdown)}>
@@ -201,43 +250,6 @@ function Main() {
 
             {authModelIsOpen && <AuthModel setAuthModelIsOpen={setAuthModelIsOpen} />}
 
-            {messages.length > 0 && (
-
-                <div className='chat-section' onClick={() => { setShowDropdown(false) }}>
-
-                    {messages.map((message, index) => (
-
-                        <div key={index} className='role'>
-
-                            {message.type === 'user' && <Message message={message} />}
-
-                            {message.type === 'bot' && message.images && <ModelGeneratedOutPut
-                                message={message} handleImageOpen={handleImageOpen} handleDownload={handleDownload} />}
-
-                            {message.type === 'loading' && <Skeleton message={message} />}
-
-                        </div>
-
-                    ))}
-
-                </div>
-            )}
-
-
-            <div>
-                {messages.length === 0 && (
-                    <div className='header'>
-                        <h2 className='inter-bold model-text'>Hey , I’m Geo Ai</h2>
-                        <h1 className='inter-semibold text'>Ready to bring your imagination to life?</h1>
-                    </div>
-                )}
-
-                <ImagePreview handleDownload={handleDownload} handleImageOpen={handleImageOpen}
-                    imgIsOpen={imgIsOpen} selectedImage={selectedImage} />
-
-                <PromptBox setPrompt={setPrompt} handleSend={handleSend} imageEngine={imageEngine} isStarting={isStarting}
-                    numberOfImages={numberOfImages} prompt={prompt} resolution={resolution} setImageEngine={setImageEngine} setNumberOfImages={setNumberOfImages} setResolution={setResolution} />
-            </div>
         </div>
 
     );
