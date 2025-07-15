@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/c/" element={<Main />} />
+        <Route path="/c" element={<Main />} />
       </Routes>
     </Router>
   );
