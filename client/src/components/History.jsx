@@ -11,7 +11,7 @@ export default function History({ fetchConversation }) {
      useEffect(() => {
 
           async function fetchPrompts() {
-               await axios.get(`http://localhost:5000/api/v1/get-prompts/${JSON.parse(localStorage.getItem('user')).id}`)
+               await axios.get(`https://00b12ea6-a830-4b81-868d-3d9a30a01fb3-00-24o3g75xtmkfn.sisko.replit.dev/api/v1/get-prompts/${JSON.parse(localStorage.getItem('user')).id}`)
                     .then(response => setPrompts(response.data.prompts))
                     .catch(error => console.warn(error))
           }
