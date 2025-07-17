@@ -43,7 +43,7 @@ function Main() {
 
     function fetchConversation(id) {
 
-        axios.get(`https://00b12ea6-a830-4b81-868d-3d9a30a01fb3-00-24o3g75xtmkfn.sisko.replit.dev/api/v1/get-conversation/${id}`)
+        axios.get(`http://13.51.168.1:5000/api/v1/get-conversation/${id}`)
             .then(res => {
 
                 if (res.data.conversations) {
@@ -133,7 +133,7 @@ function Main() {
 
         const chatId = uuidv4().split('-')[0];
 
-        await axios.post('https://00b12ea6-a830-4b81-868d-3d9a30a01fb3-00-24o3g75xtmkfn.sisko.replit.dev/api/v1/save-conversation', {
+        await axios.post('http://13.51.168.1:5000/api/v1/save-conversation', {
             conversationId: id,
             chatId,
             userId: JSON.parse(localStorage.getItem('user')).id,
@@ -153,7 +153,7 @@ function Main() {
         }
 
         try {
-            const response = await axios.post('https://00b12ea6-a830-4b81-868d-3d9a30a01fb3-00-24o3g75xtmkfn.sisko.replit.dev/api/v1/generate-image', {
+            const response = await axios.post('http://13.51.168.1:5000/api/v1/generate-image', {
                 prompt,
                 count: numberOfImages,
                 resolution,
@@ -164,7 +164,7 @@ function Main() {
                 setIsStarting(false);
                 setPrompt('');
 
-                await axios.post('https://00b12ea6-a830-4b81-868d-3d9a30a01fb3-00-24o3g75xtmkfn.sisko.replit.dev/api/v1/save-conversation-image', {
+                await axios.post('http://13.51.168.1:5000/api/v1/save-conversation-image', {
                     conversationId: id,
                     chatId,
                     images: images,

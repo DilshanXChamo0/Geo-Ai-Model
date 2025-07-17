@@ -14,7 +14,7 @@ export default function AuthModel({ setAuthModelIsOpen }) {
      const [authOption, setAuthOption] = useState('register');
 
      async function handleSubmit() {
-          await axios.post('https://00b12ea6-a830-4b81-868d-3d9a30a01fb3-00-24o3g75xtmkfn.sisko.replit.dev/api/v1/user/authenticate', {
+          await axios.post('http://13.51.168.1:5000/api/v1/user/authenticate', {
                email,
                password
           })
@@ -34,7 +34,7 @@ export default function AuthModel({ setAuthModelIsOpen }) {
 
      async function register() {
 
-          await axios.post('https://00b12ea6-a830-4b81-868d-3d9a30a01fb3-00-24o3g75xtmkfn.sisko.replit.dev/api/v1/user/register', {
+          await axios.post('http://13.51.168.1:5000/api/v1/user/register', {
                username,
                email,
                password
