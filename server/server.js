@@ -19,6 +19,9 @@ mongoose.connect(process.env.MONGODB)
     .then(() => console.log('MongoDB Connected!'))
     .catch(err => console.error('MongoDB Connection Failed:', err.message));
 
+app.get('/', (req, res) => {
+    res.send('Server is Running....');
+});
 
 app.post('/api/v1/generate-image', async (req, res) => {
 

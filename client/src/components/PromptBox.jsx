@@ -63,8 +63,6 @@ export default function PromptBox({ isStarting, prompt, numberOfImages, setPromp
                     </div>
                </div>
 
-
-
                <div className="mini-content">
 
                     <textarea
