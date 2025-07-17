@@ -11,7 +11,7 @@ export default function History({ fetchConversation }) {
      useEffect(() => {
 
           async function fetchPrompts() {
-               await axios.get(`http://13.51.168.1:5000/api/v1/get-prompts/${JSON.parse(localStorage.getItem('user')).id}`)
+               await axios.get(`https://geo-server.duckdns.org/api/v1/get-prompts/${JSON.parse(localStorage.getItem('user')).id}`)
                     .then(response => setPrompts(response.data.prompts))
                     .catch(error => console.warn(error))
           }
